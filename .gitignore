@@ -4,3 +4,5 @@ raw/*.mp4
 raw/*.pik
 
 __pycache__/
+
+*.pt
