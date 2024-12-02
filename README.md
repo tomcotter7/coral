@@ -6,7 +6,7 @@ In order to do this, we will be finetuning a YoloV11 model on multiple aquatic l
 
 ## Installation
 
-To install the project, clone the repository and then install the dependencies:
+To install the project, clone the repository (`git clone git@github.com:tomcotter7/coral.git`) and then install the dependencies:
 
 ```bash
 python3 -m venv venv
@@ -25,13 +25,23 @@ This project has two main components, the data collection and the model training
 
 For the data, the project uses the [missfish](https://github.com/DianZhang/missfish) dataset. The dataset is not included in this repository, but can be downloaded from the link provided.
 
-To set up the data, include all `.mp4` files and the `.pik` file inside the `raw/` folder. Then run:
+To set up the data, add all the `.mp4` files to the `raw/` directory.
+```
+raw/
+    aja-helo-*_0000.mp4
+    ....
+    aja-helo-*-1000.mp4
+```
+
+You should also add the `niap_2019_annotation_all.pik` file to the `raw/` directory.
+
+Then, you can run the following command to transform the data:
 
 ```bash
 python src/transform.py missfish
 ```
 
-This will transform the data into the correct format for training, which is:
+This will transform the data into the correct format for training YOLO, which is:
 
 ```
 data/
@@ -55,6 +65,8 @@ data/
             ...
 ```
 
+This is required by the YOLO model, see [here](https://docs.ultralytics.com/datasets/#contribute-new-datasets) for more information.
+
 To make sure this has worked, run:
 
 ```bash
@@ -63,9 +75,13 @@ python src/transform.py view <path_to_image> <path_to_label>
 
 ### Model Training
 
-To train the model, run:
+Once the data is setup, you can finetune the model! To train the model, run:
 
 ```bash
 python src/train.py
 ```
+This will produce a custom YOLO model that is trained on the missfish dataset. You can then later adapt this model to your own dataset, or just use it to detect fish.
 
+To adapt the finetuned MissFish model to your own dataset, you can run:
+
+TODO: Add command to adapt model to new dataset
