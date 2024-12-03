@@ -80,8 +80,15 @@ Once the data is setup, you can finetune the model! To train the model, run:
 ```bash
 python src/train.py
 ```
-This will produce a custom YOLO model that is trained on the missfish dataset. You can then later adapt this model to your own dataset, or just use it to detect fish.
+This will produce a custom YOLO model that is trained on the missfish dataset. The output will be saved to `runs/detect/train_N`, where `N` is the run number. This value should be shown in the output of the training script. You will find your custom model weights in `runs/detect/train_N/weights/best.pt`. 
 
-To adapt the finetuned MissFish model to your own dataset, you can run:
+### Model Inference
 
-TODO: Add command to adapt model to new dataset
+Once you have your updated weights, you can run inference via:
+
+
+```bash
+python src/inference.py image <path_to_weights> <path_to_image>
+```
+
+This will work with images & videos. It will also work with livestreams if you have a direct link to the stream. It will save the output to `output/`, and this will include all images (or frames) that a detection was made on.
