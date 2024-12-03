@@ -5,7 +5,7 @@ import click
 @click.command()
 def train():
     model = YOLO("yolo11n.pt")
-    results = model.train(data=Path(__file__).parent.parent / "data" / "data.yaml", epochs=1)
+    results = model.train(data=Path(__file__).parent.parent / "data" / "data.yaml", epochs=50, single_cls=True, plots=True)
     click.echo(results)
 
 @click.command()
@@ -15,7 +15,8 @@ def train_custom(custom_model_file: str, data: str|None):
     model = YOLO(custom_model_file)
     if data is None:
         data = str(Path(__file__).parent.parent / "data" / "data.yaml")
-    results = model.train(data=data, epochs=1)
+    results = model.train(data=data, epochs=50, single_cls=True, plots=True)
+    click.echo(results)
 
 @click.group()
 def cli():

@@ -92,3 +92,11 @@ python src/inference.py image <path_to_weights> <path_to_image>
 ```
 
 This will work with images & videos. It will also work with livestreams if you have a direct link to the stream. It will save the output to `output/`, and this will include all images (or frames) that a detection was made on.
+
+### Continued Training on New Datasets
+
+This feature is currently experimental, however, as long as you have a dataset specified in the correct format, you can continue training on it. To do this, run:
+
+```bash
+python src/train.py train_custom <path_to_model_file> -d <path_to_data.yaml>
+```
